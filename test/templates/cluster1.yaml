@@ -1,0 +1,26 @@
+apiVersion: cluster.x-k8s.io/v1beta1
+kind: Cluster
+metadata:
+  name: my-cluster1
+  namespace: default
+  labels:
+    cni: kindnet
+spec:
+  clusterNetwork:
+    services:
+      cidrBlocks: ["10.96.0.0/12"]
+    pods:
+      cidrBlocks: ["192.168.0.0/16"]
+    serviceDomain: "cluster.local"
+  topology:
+    class: clusterclass1
+    version: v1.21.2
+    controlPlane:
+      replicas: 1
+    workers:
+      machineDeployments:
+        - name: md1
+          class: "md-class-1"
+          replicas: 1
+
+
